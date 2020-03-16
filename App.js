@@ -1,35 +1,41 @@
 const DB_USER = [
     {
-        username: "Azis",
-        password: "azisganteng123"
+        username: "azis",
+        password: "azisganteng123",
     }
 ]
 
 const inputUsername = document.querySelector("#username");
 const inputPassword = document.querySelector("#password");
-const buttonSubmit = document.querySelector("#submit");
+const inputCPassword = document.querySelector("#cPassword");
+const buttonSubmit = document.querySelector("#submitForm");
+const warningMsg = document.querySelector(".warning");
 
-buttonSubmit.addEventListener('click', (e) =>{
+buttonSubmit.addEventListener('click', (e) => {
     e.preventDefault();
+
+    const valueInputUsername = inputUsername.value;
     const valueInputPassword = inputPassword.value;
-    const valueiInputUsername = inputUsername.value;
+    const valueInputCPassword = inputCPassword.value;
 
-    let flag = 0;
+    if (valueInputPassword === valueInputCPassword) {
+        //Hide Warning Text
+        warningMsg.classList.add("warning");
 
-
-    DB_USER.map((data) => {
-        if(data.username == valueiInputUsername && data.password == valueInputPassword){
-            flag = 1;
+        const data = {
+            username: valueInputUsername,
+            password: valueInputPassword
         }
-    });
 
-    const warningmsg = document.querySelector(".warning");
+        DB_USER.push(data);
 
-    if(flag == 0){
-        warningmsg.className = "text-danger";
+        // Response Success
+        console.log("Registrasi Berhasil, Terimakasih!");
+        console.log(DB_USER);
+        alert("Berhasil Register")
     }else{
-        alert("Selama anda masuk ke home");
+        // Respons When Password is Different
+        warningMsg.classList.remove("warning");
     }
-});
 
-
+})
